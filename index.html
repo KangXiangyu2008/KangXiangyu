@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>康祥宇 · 个人主页 | 双足实验室招新</title>
+<meta name="description" content="26级自动化 康祥宇 的个人主页：报名方向 机器人先进视觉—工业测量。包含成长经历、能力路线与学习计划。">
+<style>
+  :root{
+    --ink:#241f26; --muted:#6d6572; --bg:#faf7f5; --card:#ffffff; --line:#eee3e4;
+    --accent:#a4143c; --accent-soft:#fdeef2; --tech:#1f6feb; --tech-soft:#eaf1fe;
+    --shadow:0 10px 30px rgba(60,30,40,.08); --radius:16px;
+  }
+  html[data-theme="dark"]{
+    --ink:#eceaf0; --muted:#a49daa; --bg:#141216; --card:#1c1a20; --line:#2c2830;
+    --accent:#ff7d9d; --accent-soft:#2a1a22; --tech:#7aa8ff; --tech-soft:#16202f;
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    line-height:1.85; font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+
+  /* ---------- 顶栏 ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
+    background:var(--bg);
+    background:color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{display:flex; align-items:center; gap:14px; padding:10px 0; min-width:0}
+  .brand{font-weight:800; letter-spacing:.5px; white-space:nowrap}
+  .brand small{font-weight:500; color:var(--muted); margin-left:8px; font-size:12px}
+  .navlinks{display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; flex:1; min-width:0}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{
+    color:var(--muted); padding:6px 11px; border-radius:999px; font-size:14px; white-space:nowrap;
+  }
+  .navlinks a:hover{background:var(--accent-soft); color:var(--accent)}
+  .navlinks a.on{background:var(--accent); color:#fff}
+  .theme-btn{
+    border:1px solid var(--line); background:var(--card); color:var(--ink);
+    border-radius:999px; padding:6px 12px; cursor:pointer; font-size:14px;
+  }
+
+  /* ---------- 通用 ---------- */
+  section{padding:64px 0}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700;
+    color:var(--accent); background:var(--accent-soft); border-radius:999px; padding:4px 12px;
+  }
+  h1,h2,h3{line-height:1.35; margin:0 0 12px}
+  h2{font-size:clamp(22px,3.4vw,30px); letter-spacing:.3px}
+  h3{font-size:18px}
+  p{margin:0 0 14px}
+  .lead{font-size:17px; color:var(--muted)}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; box-shadow:var(--shadow);
+  }
+  .grid{display:grid; gap:16px; align-items:start}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .tag{
+    display:inline-block; font-size:12.5px; color:var(--tech); background:var(--tech-soft);
+    border-radius:999px; padding:3px 10px; margin:0 6px 6px 0;
+  }
+  .muted{color:var(--muted)}
+  .small{font-size:14px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:76px 0 40px}
+  .hero h1{font-size:clamp(30px,6vw,52px); letter-spacing:1px}
+  .hero .who{font-size:clamp(15px,2.4vw,19px); color:var(--muted); margin-bottom:18px}
+  .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px}
+  .btn{
+    display:inline-block; padding:11px 20px; border-radius:999px; font-weight:600; font-size:15px;
+    border:1px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+  }
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+  .btn.ghost{background:transparent}
+
+  /* ---------- 要求对照 ---------- */
+  .req{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:20px}
+  .req .card{border-top:4px solid var(--accent)}
+  .req .no{font-weight:800; color:var(--accent); font-size:22px; line-height:1}
+
+  /* ---------- 方向选择 chips ---------- */
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 6px}
+  .chip{
+    border:1px solid var(--line); background:var(--card); border-radius:999px;
+    padding:9px 18px; font-size:15px; cursor:pointer; color:var(--muted);
+  }
+  .chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:700}
+  .chip-note{margin-top:10px; font-size:14.5px; color:var(--accent)}
+
+  /* ---------- 技术链 ---------- */
+  .chain{counter-reset:step}
+  .chain .card{position:relative; padding-left:56px}
+  .chain .card::before{
+    counter-increment:step; content:counter(step);
+    position:absolute; left:18px; top:20px; width:26px; height:26px; border-radius:50%;
+    background:var(--accent); color:#fff; font-weight:700; font-size:14px;
+    display:grid; place-items:center;
+  }
+  .flow{
+    margin-top:14px; font-size:14.5px; color:var(--muted);
+    background:var(--tech-soft); border-radius:12px; padding:12px 16px;
+  }
+
+  /* ---------- 时间轴 ---------- */
+  .timeline{position:relative; margin-top:24px; padding-left:28px}
+  .timeline::before{content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line)}
+  .tl{position:relative; margin-bottom:22px}
+  .tl::before{
+    content:""; position:absolute; left:-24px; top:8px; width:12px; height:12px; border-radius:50%;
+    background:var(--card); border:3px solid var(--accent);
+  }
+  .tl .when{font-size:13.5px; font-weight:700; color:var(--accent); letter-spacing:.5px}
+  .tl .what{font-weight:700; margin:2px 0 6px}
+  .tl p{margin:0 0 8px; color:var(--muted)}
+
+  /* 窄屏（手机）下更紧凑 */
+  @media (max-width:560px){
+    section{padding:46px 0}
+    .card{padding:18px}
+  }
+
+  /* ---------- 其他 ---------- */
+  ul.clean{margin:0; padding-left:1.2em}
+  ul.clean li{margin-bottom:8px}
+  .kbd{font-family:ui-monospace,Consolas,monospace; font-size:13px; background:var(--tech-soft); color:var(--tech); padding:1px 6px; border-radius:6px}
+  footer{padding:40px 0 60px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); margin-top:30px}
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1; transform:none}
+  .totop{
+    position:fixed; right:18px; bottom:18px; z-index:60; display:none;
+    width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
+    background:var(--card); color:var(--ink); cursor:pointer; font-size:18px; box-shadow:var(--shadow);
+  }
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1; transform:none; transition:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">康祥宇<small>2026级 · 自动化</small></div>
+    <nav class="navlinks">
+      <a href="#direction">方向</a>
+      <a href="#route">路线</a>
+      <a href="#story">折腾史</a>
+      <a href="#college">大学</a>
+      <a href="#method">学法</a>
+      <a href="#tiny">小尝试</a>
+      <a href="#me">关于我</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" title="切换深浅色">🌙 夜间</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero wrap" id="top">
+    <span class="eyebrow">双足实验室招新 · 第一轮考核</span>
+    <h1>借助 AI，做一个<br>让我们认识你的网页</h1>
+    <div class="who">
+      我是 <strong>康祥宇</strong>，26 级自动化专业，来自山西太原。<br>
+      很荣幸参加双足实验室的招新 —— 这个网页就是我的自我介绍。
+    </div>
+    <p class="lead">我选择的方向：<strong>机器人先进视觉 — 工业测量</strong>。让相机把东西拍清楚，交给机器去识别、找准关键特征，再把量出来的数据做误差分析和精度评估 —— 这条从「看见」到「量准」的链路，正是我最想学的东西。</p>
+    <div class="cta">
+      <a class="btn primary" href="#tiny">看看我的小尝试 →</a>
+      <a class="btn" href="#direction">我为什么选这个方向</a>
+      <a class="btn ghost" href="#story">从一台旧笔记本说起</a>
+    </div>
+  </section>
+
+  <!-- ================= 招新要求对照 ================= -->
+  <section class="wrap" id="reqs">
+    <div class="card">
+      <h3>这份网页对应的招新要求</h3>
+      <p class="small muted">招新里写了三件事，我把它们做成了页面里的三块内容，可以直接对照着看：</p>
+      <div class="req">
+        <div class="card" style="box-shadow:none">
+          <div class="no">01</div>
+          <h3>展示真实的你</h3>
+          <p class="small muted">从高中的兴趣主动接触、折腾过的系统，到入学后的分列式、学委、摄影 —— 见 <a href="#story">折腾史</a> 与 <a href="#me">关于我</a>。</p>
+        </div>
+        <div class="card" style="box-shadow:none">
+          <div class="no">02</div>
+          <h3>小尝试，也值得展示</h3>
+          <p class="small muted">装系统、修 EFI、黑苹果配 EFI；用 AI 四十分钟对完课表、半小时分完习概小组 —— 见 <a href="#tiny">小尝试</a>。</p>
+        </div>
+        <div class="card" style="box-shadow:none">
+          <div class="no">03</div>
+          <h3>让想法真正运行起来</h3>
+          <p class="small muted">这个网页本身就是可运行的成果：单文件、零外部依赖、手机端能正常打开，也能部署上线拿到一个网址。</p>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top:14px">* 必选项「明确选择一个实验室方向」见下方 —— 我选的是 <strong>工业测量</strong>。</p>
+    </div>
+  </section>
+
+  <!-- ================= 方向 ================= -->
+  <section class="wrap" id="direction">
+    <span class="eyebrow reveal">必选项 · 我感兴趣的方向</span>
+    <h2 class="reveal">机器人先进视觉 — 工业测量</h2>
+    <p class="lead reveal">请在下面选一个方向（页面里我预选了工业测量）：</p>
+
+    <div class="chips reveal" id="chips">
+      <button class="chip" aria-pressed="false" data-k="无人机">无人机</button>
+      <button class="chip" aria-pressed="false" data-k="3D">3D</button>
+      <button class="chip" aria-pressed="true"  data-k="工业测量">工业测量</button>
+      <button class="chip" aria-pressed="false" data-k="11v11">11v11</button>
+      <button class="chip" aria-pressed="false" data-k="巡航">巡航</button>
+    </div>
+    <p class="chip-note" id="chipNote">我选择：工业测量 —— 因为它是「看得清 → 认得准 → 量得精」的一件事，跟我对相机和精度的兴趣正好接上。</p>
+
+    <div class="grid g2" style="margin-top:22px">
+      <div class="card reveal">
+        <h3>这个方向在做什么</h3>
+        <p>面向工业检测与智能制造场景的机器视觉竞赛项目。比赛以工业目标的<strong>识别、定位与尺寸测量</strong>为核心任务：通过视觉传感器获取被测对象信息，并利用计算机视觉与智能算法完成目标分析和测量结果输出。</p>
+        <p>相比传统人工测量方式，机器视觉具有<strong>非接触、效率高、重复性好、易于自动化</strong>等特点。通过这个竞赛平台，可以深入研究工业视觉中的图像处理、目标定位、特征提取以及高精度测量等关键技术。</p>
+      </div>
+      <div class="card reveal">
+        <h3>我理解的三步技术链</h3>
+        <div class="grid chain" style="gap:12px">
+          <div class="card" style="box-shadow:none;padding-top:16px;padding-bottom:16px">
+            <h3 style="font-size:16px;margin-bottom:4px">视觉感知与图像处理</h3>
+            <p class="small muted" style="margin:0">对采集图像进行预处理、畸变校正和有效区域提取，提高复杂工业环境下的图像质量与稳定性。</p>
+          </div>
+          <div class="card" style="box-shadow:none;padding-top:16px;padding-bottom:16px">
+            <h3 style="font-size:16px;margin-bottom:4px">目标识别与几何特征提取</h3>
+            <p class="small muted" style="margin:0">识别待测目标，提取边缘、轮廓及关键特征，实现目标位置确定与测量基准建立。</p>
+          </div>
+          <div class="card" style="box-shadow:none;padding-top:16px;padding-bottom:16px">
+            <h3 style="font-size:16px;margin-bottom:4px">工业测量与结果分析</h3>
+            <p class="small muted" style="margin:0">根据视觉信息完成尺寸、位置等参数计算，并对测量结果进行误差分析与精度评估。</p>
+          </div>
+        </div>
+        <div class="flow">完整流程：图像采集 → 视觉分析 → 参数测量 → 结果输出</div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:16px">
+      <h3>为什么偏偏是它</h3>
+      <p>我很喜欢摄影 —— 现在用尼康 Z30，还拍不出什么惊艳的照片，但我乐在其中。相机是「把世界看清楚」的工具，而工业测量是「把看清楚的东西量准确」，一个偏感性、一个偏严谨，我恰好两边都喜欢。看到这个方向的第一眼就觉得：这就是我想钻进去的东西。</p>
+    </div>
+  </section>
+
+  <!-- ================= 路线 ================= -->
+  <section class="wrap" id="route">
+    <span class="eyebrow reveal">我的准备与计划</span>
+    <h2 class="reveal">能力路线：先把地基打牢，再往上垒</h2>
+    <p class="lead reveal">我知道首先需要打好基础，其次是把和专业息息相关的内容学起来，并且真正付诸实践。</p>
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>① 基础课不能落下</h3>
+        <p class="muted">高数、线代、物理等 —— 测量里的坐标变换、误差传播、标定求解，最后都要回到这些数学和物理上。</p>
+        <div><span class="tag">高等数学</span><span class="tag">线性代数</span><span class="tag">大学物理</span></div>
+      </div>
+      <div class="card reveal">
+        <h3>② 两个工具基础</h3>
+        <p class="muted">先把「能跟硬件说话」的能力补上：</p>
+        <div><span class="tag">C 语言</span><span class="tag">单片机</span></div>
+      </div>
+      <div class="card reveal">
+        <h3>③ 专业方向课</h3>
+        <p class="muted">和本专业、和这个方向直接相关的内容：</p>
+        <div><span class="tag">数字图像处理</span><span class="tag">计算机视觉基础</span><span class="tag">控制论</span></div>
+      </div>
+      <div class="card reveal">
+        <h3>④ 付诸实践</h3>
+        <p class="muted">学一点就动手做一点：把学到的东西写成能跑的小程序、把折腾的过程记录下来 —— 写进代码里、跑起来才算真懂。</p>
+        <div><span class="tag">动手验证</span><span class="tag">记录过程</span></div>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:16px">
+      <p style="margin:0">我认为加入实验室考核的过程，同时也是我自学的一个过程。<strong>无论结果如何，我都会保持好奇心，探索未知，尝试新鲜事物。</strong></p>
+    </div>
+  </section>
+
+  <!-- ================= 折腾史 ================= -->
+  <section class="wrap" id="story">
+    <span class="eyebrow reveal">01 · 展示真实的你</span>
+    <h2 class="reveal">一台旧笔记本，和四年折腾</h2>
+    <p class="lead reveal">我来自山西太原。小时候对数码比较感兴趣，慢慢关注了一些相关博主 —— 比如分享高效软件的 Topbook、做数码评测的影视飓风、极客湾、Testv，以及用相机探索世界的 links。看着看着，就喜欢上了这方面的内容。</p>
+
+    <div class="timeline reveal">
+      <div class="tl">
+        <div class="when">初中 · 疫情网课时期</div>
+        <div class="what">一台「大厦将倾」的三星笔记本</div>
+        <p>因为疫情，我们在家上网课，家里人给了我台三星电脑：i5-5200u 的处理器、机械硬盘，还有父母残留的 360 全家桶。传到我手里，只能说是大厦将倾了。</p>
+      </div>
+      <div class="tl">
+        <div class="when">第一次动手</div>
+        <div class="what">刷上精简版 Windows 11</div>
+        <p>微软当时发布了 Win11，可我的电脑连 Win10 都带不动。在网上刷帖子时，偶然看见别人用做出来的精简版 ISO Win11 系统，于是就尝试给电脑装上。当我按教程一步步做下去，看见开机时田字型的 win 标和全新的状态栏时，心情无比激动。</p>
+      </div>
+      <div class="tl">
+        <div class="when">碰壁</div>
+        <div class="what">装 Office 报错、驱动缺失、退到 Win8.1</div>
+        <p>可是我在安装 Office 和其他软件时，电脑却常常报错 —— 少了驱动和其他软件。折腾一番终无果，最后索性安了个听说优化很不错的 Win8.1。</p>
+      </div>
+      <div class="tl">
+        <div class="when">转向 Linux</div>
+        <div class="what">deepin OS、Ubuntu，还有被代码装软件的震撼</div>
+        <p>折腾的心终究无法停止，于是在 8.1 上尝试装了个 Linux（deepin OS），覆盖掉了原来被 360 折磨不堪的 C 盘。不得不说 deepin 的界面很美丽，但软件适配不上就很难受，很多常用软件都无法使用，就算有 wine 也不太行，尝鲜了几天就放弃了 —— 但当时我被「用代码安装软件」的方式震惊了。后来又反反复复装了不少，像是乌班图和其他 Windows。</p>
+      </div>
+      <div class="tl">
+        <div class="when">翻车与自救</div>
+        <div class="what">EFI 被我搞坏，靠 PE 盘恢复</div>
+        <p>有一次，电脑的 EFI 被我搞坏了，只能用提前做好的 PE 盘恢复。那次之后我才真正意识到备份和「留一条后路」的重要性。</p>
+      </div>
+      <div class="tl">
+        <div class="when">最得意的一次</div>
+        <div class="what">在硬盘新分区上装黑苹果</div>
+        <p>后来接触到了黑苹果，并被深深吸引。在 B 站上看见有个 UP 主做了个不用 U 盘、而是直接在硬盘上安装在新分区的教程，决定尝试。记得最难的是配 macOS 的 EFI，没有现成的，只能在 CSDN 上慢慢找驱动，最后终于完成，颇为得意。</p>
+      </div>
+      <div class="tl">
+        <div class="when">后来</div>
+        <div class="what">新电脑来了，高中也到了</div>
+        <p>遗憾的是，后来家里来了新电脑、苹果全面转向 ARM 架构，加上每周只有一天休息、堆满作业的高中三年，我逐渐折腾不起来了。回想四五年前的自己，竟让我感慨万千。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 大学 ================= -->
+  <section class="wrap" id="college">
+    <span class="eyebrow reveal">现在 · 大学</span>
+    <h2 class="reveal">进入大学之后</h2>
+    <div class="grid g3">
+      <div class="card reveal">
+        <h3>分列式</h3>
+        <p class="muted" style="margin:0">我代表连队踢了分列式 —— 那是一群人把动作练到一个节拍上的事。</p>
+      </div>
+      <div class="card reveal">
+        <h3>学习委员</h3>
+        <p class="muted" style="margin:0">也很荣幸被选为了学委，开始习惯替大家把通知、作业、时间节点理清楚。</p>
+      </div>
+      <div class="card reveal">
+        <h3>新的体会</h3>
+        <p class="muted" style="margin:0">在新的环境里，我最有感慨的是：努力要自己变得优秀，像优秀的同学学习。</p>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card reveal">
+        <h3>关于团队精神</h3>
+        <p style="margin:0">我对它的感悟是：成员之间要<strong>坦率交流、打破信息差</strong>，也要<strong>倾听每一位同学的意见</strong>，劲往一处使。</p>
+      </div>
+      <div class="card reveal">
+        <h3>我认为最宝贵的特质</h3>
+        <p style="margin:0">一个人最宝贵的特质，是在被生活压力之后<strong>仍然对新事物保持好奇心、敢于尝试新鲜事物</strong>，而不是裹足不前。只有好奇和兴趣才是支撑一个人向前的动力，否则就会被内卷焦虑和对自身的怀疑拖进漩涡。</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:16px">
+      <h3>关于 AI</h3>
+      <p>现在的 AI 如此强大 —— <strong>您所看到的这个网站就是由它书写</strong>；我四十分钟对完的表、半个多小时分完的习概小组，DeepSeek Harness 总共十五分钟就能完成。</p>
+      <p style="margin:0">AI agent 一日千里，我们必须学会应用它：<strong>把重复的活交给它，把自己的判断力用在真正需要的地方。</strong></p>
+    </div>
+  </section>
+
+  <!-- ================= 学法 ================= -->
+  <section class="wrap" id="method">
+    <span class="eyebrow reveal">我的学习方式</span>
+    <h2 class="reveal">先看整体，再反复回到细节</h2>
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>先建立整体印象</h3>
+        <p style="margin:0">我常常愿意在新的问题中、或者在学一门课之前，先看看 B 站上的教程，形成自己对它大概的整体了解，再不断深入。</p>
+      </div>
+      <div class="card reveal">
+        <h3>重复也是学习</h3>
+        <p style="margin:0">我认为学习还有一个重要之处，就是对旧有内容的重复 —— 不断加深记忆和了解。学过的东西隔一段时间再回头看，往往能看到第一遍没看见的联系。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 小尝试 ================= -->
+  <section class="wrap" id="tiny">
+    <span class="eyebrow reveal">02 · 小尝试，也值得展示</span>
+    <h2 class="reveal">这些都不算完整项目，但它们真的发生过</h2>
+    <p class="lead reveal">招新里说：「不必是完整项目，也不必有比赛奖项。」那我就把这些小尝试摆出来。</p>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <h3>装系统这件事，我折腾了四年</h3>
+        <ul class="clean muted">
+          <li>给老三星笔记本刷精简版 Win11，第一次看见全新的开机画面</li>
+          <li>在 Win8.1 上装 deepin OS 覆盖 C 盘，被「用代码装软件」震到</li>
+          <li>反复尝试 Ubuntu 和其他 Windows，习惯了「装坏—查资料—重来」</li>
+          <li>EFI 搞坏后用 PE 盘救回系统</li>
+          <li>在硬盘新分区装黑苹果，去 CSDN 慢慢配 macOS 的 EFI 驱动</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>让 AI 帮我干过的活</h3>
+        <ul class="clean muted">
+          <li>四十分钟核对完一份年级课表（把手机截图和总表逐格比对）</li>
+          <li>半个多小时分完习概小组（60 人、男女分组、宿舍尽量同组）</li>
+          <li>用 DeepSeek Harness 十五分钟完成上面这两件的收尾与出文件</li>
+          <li>这个网页本身：从零到能打开，全程与 AI 协作</li>
+        </ul>
+        <p class="small muted" style="margin:10px 0 0">结论：AI 不是替我思考，而是帮我把想法更快地变成能跑起来的东西。</p>
+      </div>
+      <div class="card reveal">
+        <h3>摄影与出行</h3>
+        <p class="muted">我的兴趣爱好是摄影和旅游。虽然现在用尼康 Z30 还拍不出惊艳的照片，但是我乐在其中。这可能也是我选择这个方向的原因 —— 都是以「看」为起点的事情。</p>
+      </div>
+      <div class="card reveal">
+        <h3>这个网页</h3>
+        <p class="muted">为了把「想法真正运行起来」，我做了这个页面：先梳理内容结构，再写 HTML/CSS/JavaScript，最后在电脑和手机上调排版 —— 全程与 AI 协作。单文件、不依赖任何外部资源，双击就能打开，也能部署成一个网址。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 关于我 ================= -->
+  <section class="wrap" id="me">
+    <span class="eyebrow reveal">关于我</span>
+    <h2 class="reveal">一些零碎但真实的标签</h2>
+    <div class="grid g3">
+      <div class="card reveal">
+        <h3>坐标</h3>
+        <p class="muted" style="margin:0">山西太原人，现在在自动化专业读大一（26 级）。</p>
+      </div>
+      <div class="card reveal">
+        <h3>数码启蒙</h3>
+        <p class="muted" style="margin:0">Topbook、影视飓风、极客湾、Testv、links —— 从看他们的视频，到自己动手折腾。</p>
+      </div>
+      <div class="card reveal">
+        <h3>现在手里</h3>
+        <p class="muted" style="margin:0">尼康 Z30，和永远装不满的课程表。</p>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:16px">
+      <h3>我喜欢的一句话</h3>
+      <p style="margin:0;font-size:17px">「一个人最宝贵的特质，是在被生活压力之后仍然对新事物保持好奇心。」<span class="muted small">—— 这是我这几年最确信的一件事。</span></p>
+    </div>
+  </section>
+
+  <!-- ================= 结尾 ================= -->
+  <section class="wrap" id="end">
+    <div class="card reveal" style="text-align:center;padding:38px 22px">
+      <h2 style="margin-bottom:10px">感谢您倾听我的故事</h2>
+      <p class="muted" style="margin-bottom:0">如果给我一个机会，我会从最基础的那一行代码、那一次标定开始做起。</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn primary" href="#top">回到顶部</a>
+        <a class="btn" href="#direction">看看我选的方向</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div>康祥宇 · 2026 级自动化 · 双足实验室招新 · 方向：机器人先进视觉 — 工业测量</div>
+  <div class="small" style="margin-top:6px">本页为单文件网页（HTML + CSS + JavaScript），无需联网即可打开；页面由我借助 AI 协作完成 —— 正好呼应这次招新的主题。</div>
+</footer>
+
+<button class="totop" id="toTop" title="回到顶部">↑</button>
+
+<script>
+/* ---------------- 主题切换 ---------------- */
+(function(){
+  const root=document.documentElement, btn=document.getElementById('themeBtn');
+  const saved=localStorage.getItem('kx-theme');
+  if(saved) root.setAttribute('data-theme',saved);
+  else if(window.matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme','dark');
+  function sync(){ btn.textContent = root.getAttribute('data-theme')==='dark' ? '☀️ 日间' : '🌙 夜间'; }
+  sync();
+  btn.addEventListener('click',()=>{
+    const next = root.getAttribute('data-theme')==='dark' ? 'light':'dark';
+    root.setAttribute('data-theme',next); localStorage.setItem('kx-theme',next); sync();
+  });
+})();
+
+/* ---------------- 滚动出现动画 ---------------- */
+(function(){
+  const els=[...document.querySelectorAll('.reveal')];
+  if(!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(e=>io.observe(e));
+})();
+
+/* ---------------- 导航高亮 + 回顶 ---------------- */
+(function(){
+  const links=[...document.querySelectorAll('.navlinks a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const secs=[...document.querySelectorAll('main section[id]')].filter(s=>map.has(s.id));
+  const totop=document.getElementById('toTop');
+  function onScroll(){
+    const y=window.scrollY+120;
+    let cur=null;
+    secs.forEach(s=>{ if(s.offsetTop<=y) cur=s.id; });
+    links.forEach(a=>a.classList.remove('on'));
+    if(cur&&map.get(cur)) map.get(cur).classList.add('on');
+    totop.style.display = window.scrollY>600 ? 'block':'none';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  totop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+})();
+
+/* ---------------- 方向选择 ---------------- */
+(function(){
+  const chips=[...document.querySelectorAll('#chips .chip')];
+  const note=document.getElementById('chipNote');
+  const text={
+    '工业测量':'我选择：工业测量 —— 因为它是「看得清 → 认得准 → 量得精」的一件事，跟我对相机和精度的兴趣正好接上。',
+    '无人机':'无人机方向我也很感兴趣（飞控与视觉的结合），但这一轮我最想先扎进工业测量。',
+    '3D':'3D 重建和测量的数学是相通的，不过我更想先把二维的精度问题做扎实。',
+    '11v11':'11v11 偏多智能体对抗，我现在的基础还支撑不了，先记下来。',
+    '巡航':'巡航涉及定位与感知，和视觉也有交叉，是我以后想了解的。'
+  };
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.setAttribute('aria-pressed','false'));
+    c.setAttribute('aria-pressed','true');
+    note.textContent=text[c.dataset.k]||'';
+  }));
+})();
+</script>
+</body>
+</html>
